@@ -10,11 +10,11 @@ rsync -ahP ~/.aliases etienne@192.168.2.38:/home/etienne/mac-backup/
 rsync -ahP ~/.mrconfig etienne@192.168.2.38:/home/etienne/mac-backup/
 rsync -ahP ~/.ssh etienne@192.168.2.38:/home/etienne/mac-backup/
 
-./generate-vscode-extensions-install.sh
-rsync -ahP ~/*.sh etienne@192.168.2.38:/home/etienne/mac-backup/
+~/scripts/generate-vscode-extensions-install.sh
+rsync -ahP --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/scripts etienne@192.168.2.38:/home/etienne/mac-backup/
 
 rsync -ahP ~/Library/Application\ Support/Code/User/settings.json etienne@192.168.2.38:/home/etienne/mac-backup/vscode/
 
-brew deps --tree --installed > homebrew-installed-packages.txt
+brew deps --tree --installed > ~/homebrew-installed-packages.txt
 rsync -ahP ~/homebrew-installed-packages.txt etienne@192.168.2.38:/home/etienne/mac-backup/
 
