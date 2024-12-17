@@ -12,7 +12,6 @@ code --install-extension esbenp.prettier-vscode --force
 code --install-extension github.copilot --force
 code --install-extension github.copilot-chat --force
 code --install-extension github.vscode-github-actions --force
-code --install-extension jacquesgariepy.out-of-code-insights --force
 code --install-extension jock.svg --force
 code --install-extension mechatroner.rainbow-csv --force
 code --install-extension ms-python.black-formatter --force
