@@ -43,6 +43,8 @@ current_command=0
 # Hide the cursor
 printf "\033[?25l"
 printf "Backup in progress...\n"
+progress_bar "0" "$total_commands"
+
 # Execute each command
 for cmd in "${commands[@]}"; do
     # Run the command, redirecting output to avoid clutter
