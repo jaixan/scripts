@@ -4,6 +4,7 @@
 progress_bar() {
     local current=$1
     local total=$2
+    local text=$3
     local width=50  # Adjust the bar width here
 
     # Calculate progress percentage
@@ -16,7 +17,7 @@ progress_bar() {
     printf -v remaining "%$((width - progress))s" ""  # Remaining part
 
     # Display the progress bar
-    printf "\r[%-${width}s] %d%%" "${bar// /█}${remaining// / }" "$percent"
+    printf "\r[%-${width}s] %d%% %s" "${bar// /█}${remaining// / }" "$percent" "$text"
 }
 
 # Commands to execute (modify this array as needed)
@@ -41,13 +42,35 @@ commands=(
     'rsync -ahP ~/database_backups/ root@guizmo.profinfo.ca:/mnt/blockstorage/backup/database_backups/'
 )
 
+# Text of commands to execute
+command_texts=(
+    '~/Documents                             '
+    'Dropbox                                 '
+    'OneDrive-CégepdeVictoriaville/CegepVicto'
+    'notes_de_cours                          '
+    'projets                                 '
+    'demo_cours                              '
+    '.aliases                                '
+    '.mrconfig                               '
+    '.ssh                                    '
+    'generate-vscode-extensions-install.sh   '
+    'scripts                                 '
+    'vscode config                           '
+    'brew deps --tree --installed            '
+    'homebrew-installed-packages.txt         '
+    'database bloganza                       '
+    'database banque                         '
+    'database cegep                          '
+    'database_backups                        '
+)
+
 total_commands=${#commands[@]}
 current_command=0
 
 # Hide the cursor
 printf "\033[?25l"
 printf "Backup in progress...\n"
-progress_bar "0" "$total_commands"
+progress_bar "0" "$total_commands" "Starting"
 
 # Execute each command
 for cmd in "${commands[@]}"; do
@@ -63,7 +86,7 @@ for cmd in "${commands[@]}"; do
 
     # Update progress
     ((current_command++))
-    progress_bar "$current_command" "$total_commands"
+    progress_bar "$current_command" "$total_commands" "${command_texts[$current_command - 1]}"
 done
 
 # Ensure the progress bar ends at 100%
