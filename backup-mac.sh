@@ -35,6 +35,10 @@ commands=(
     'rsync -ahP --exclude=".DS_Store" ~/Library/Application\ Support/Code/User/settings.json root@guizmo.profinfo.ca:/mnt/blockstorage/backup/vscode/'
     'brew deps --tree --installed > ~/homebrew-installed-packages.txt'
     'rsync -ahP ~/homebrew-installed-packages.txt root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
+    'mysqldump -u root --databases bloganza > ~/database_backups/bloganza.sql'
+    'mysqldump -u root --databases banque > ~/database_backups/banque.sql'
+    'mysqldump -u root --databases cegep > ~/database_backups/cegep.sql'
+    'rsync -ahP ~/database_backups/ root@guizmo.profinfo.ca:/mnt/blockstorage/backup/database_backups/'
 )
 
 total_commands=${#commands[@]}
