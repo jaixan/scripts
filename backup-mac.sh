@@ -40,6 +40,9 @@ commands=(
     'mysqldump -u root --databases banque > ~/database_backups/banque.sql'
     'mysqldump -u root --databases cegep > ~/database_backups/cegep.sql'
     'rsync -ahP ~/database_backups/ root@guizmo.profinfo.ca:/mnt/blockstorage/backup/database_backups/'
+    'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/bookmarks.xbel ~/notes_de_cours/bm/template/bookmarks.xbel'
+    'cd ~/notes_de_cours/bm/ && ./xbel2md.py'
+    'cd ~/notes_de_cours/bm/ && source venv/bin/activate && mkdocs gh-deploy'
 )
 
 # Text of commands to execute
@@ -62,6 +65,9 @@ command_texts=(
     'database banque                         '
     'database cegep                          '
     'database_backups                        '
+    'bookmarks.xbel                          '
+    'generate markdown                       '
+    'deploy bookmarks                        '
 )
 
 total_commands=${#commands[@]}
