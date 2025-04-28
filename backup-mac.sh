@@ -23,7 +23,6 @@ progress_bar() {
 # Commands to execute (modify this array as needed)
 commands=(
     'rsync -ahP --exclude=".DS_Store" ~/Documents root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
-    'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/Dropbox root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/CegepVicto root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/Clara root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/notes_de_cours root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
@@ -37,10 +36,6 @@ commands=(
     'rsync -ahP --exclude=".DS_Store" ~/Library/Application\ Support/Code/User/settings.json root@guizmo.profinfo.ca:/mnt/blockstorage/backup/vscode/'
     'brew deps --tree --installed > ~/homebrew-installed-packages.txt'
     'rsync -ahP ~/homebrew-installed-packages.txt root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
-    'mysqldump -u root --databases bloganza > ~/database_backups/bloganza.sql'
-    'mysqldump -u root --databases banque > ~/database_backups/banque.sql'
-    'mysqldump -u root --databases cegep > ~/database_backups/cegep.sql'
-    'rsync -ahP ~/database_backups/ root@guizmo.profinfo.ca:/mnt/blockstorage/backup/database_backups/'
     'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/bookmarks.xbel ~/notes_de_cours/bm/template/bookmarks.xbel'
     'cd ~/notes_de_cours/bm/ && ./xbel2md.py'
     'cd ~/notes_de_cours/bm/ && source venv/bin/activate && mkdocs gh-deploy'
@@ -49,7 +44,6 @@ commands=(
 # Text of commands to execute
 command_texts=(
     '~/Documents                             '
-    'Dropbox                                 '
     'OneDrive-CégepdeVictoriaville/CegepVicto'
     'OneDrive-CégepdeVictoriaville/Clara     '
     'notes_de_cours                          '
@@ -63,10 +57,6 @@ command_texts=(
     'vscode config                           '
     'brew deps --tree --installed            '
     'homebrew-installed-packages.txt         '
-    'database bloganza                       '
-    'database banque                         '
-    'database cegep                          '
-    'database_backups                        '
     'bookmarks.xbel                          '
     'generate markdown                       '
     'deploy bookmarks                        '
