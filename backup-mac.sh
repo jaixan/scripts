@@ -24,7 +24,7 @@ progress_bar() {
 commands=(
     'rsync -ahP --exclude=".DS_Store" ~/Documents root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/CegepVicto root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
-    'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/Clara root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
+    'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/Administration root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/notes_de_cours root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/projets root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/demo_cours root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
@@ -45,7 +45,7 @@ commands=(
 command_texts=(
     '~/Documents                             '
     'OneDrive-CégepdeVictoriaville/CegepVicto'
-    'OneDrive-CégepdeVictoriaville/Clara     '
+    'OneDrive-CégepdeVictoriaville/Admin     '
     'notes_de_cours                          '
     'projets                                 '
     'demo_cours                              '
