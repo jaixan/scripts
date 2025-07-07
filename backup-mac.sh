@@ -23,6 +23,7 @@ progress_bar() {
 # Commands to execute (modify this array as needed)
 commands=(
     'rsync -ahP --exclude=".DS_Store" ~/Documents root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
+    'rsync -ahP --exclude=".DS_Store" ~/keys root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/CegepVicto root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/Administration root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/notes_de_cours root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
@@ -44,6 +45,7 @@ commands=(
 # Text of commands to execute
 command_texts=(
     '~/Documents                             '
+    '~/keys                                  '
     'OneDrive-CégepdeVictoriaville/CegepVicto'
     'OneDrive-CégepdeVictoriaville/Admin     '
     'notes_de_cours                          '
