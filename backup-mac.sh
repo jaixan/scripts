@@ -40,11 +40,11 @@ commands=(
     'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/bookmarks.xbel ~/notes_de_cours/bm/template/bookmarks.xbel'
     'cd ~/notes_de_cours/bm/ && ./xbel2md.py'
     'cd ~/notes_de_cours/bm/ && source venv/bin/activate && mkdocs gh-deploy'
+    'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/FantasSecrets.kdbx /Users/etiennerivard/Library/CloudStorage/Dropbox/keepass_perso/'
 )
 
 # Text of commands to execute
 command_texts=(
-    '~/Documents                             '
     '~/keys                                  '
     'OneDrive-CégepdeVictoriaville/CegepVicto'
     'OneDrive-CégepdeVictoriaville/Admin     '
@@ -62,6 +62,7 @@ command_texts=(
     'bookmarks.xbel                          '
     'generate markdown                       '
     'deploy bookmarks                        '
+    'FantasSecrets.kdbx sur Dropbox          '
 )
 
 total_commands=${#commands[@]}
@@ -70,7 +71,7 @@ current_command=0
 # Hide the cursor
 printf "\033[?25l"
 printf "Backup in progress...\n"
-progress_bar "0" "$total_commands" "Starting"
+progress_bar "0" "$total_commands" '~/Documents                             '
 
 # Execute each command
 for cmd in "${commands[@]}"; do
