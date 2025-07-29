@@ -32,7 +32,6 @@ commands=(
     'rsync -ahP ~/.aliases root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP ~/.mrconfig root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP ~/.ssh root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
-    '~/scripts/generate-vscode-extensions-install.sh'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/scripts root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP --exclude=".DS_Store" ~/Library/Application\ Support/Code/User/settings.json root@guizmo.profinfo.ca:/mnt/blockstorage/backup/vscode/'
     'brew deps --tree --installed > ~/homebrew-installed-packages.txt'
@@ -54,7 +53,6 @@ command_texts=(
     '.aliases                                '
     '.mrconfig                               '
     '.ssh                                    '
-    'generate-vscode-extensions-install.sh   '
     'scripts                                 '
     'vscode config                           '
     'brew deps --tree --installed            '
@@ -91,7 +89,7 @@ for cmd in "${commands[@]}"; do
 done
 
 # Ensure the progress bar ends at 100%
-progress_bar "$total_commands" "$total_commands"
+progress_bar "$total_commands" "$total_commands" "Backup completed!                    "
 
 # Restore the cursor and move to a new line
 printf "\033[?25h\n"
