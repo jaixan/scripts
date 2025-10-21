@@ -38,7 +38,6 @@ commands=(
     'rsync -ahP ~/homebrew-installed-packages.txt root@guizmo.profinfo.ca:/mnt/blockstorage/backup/'
     'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/bookmarks.xbel ~/notes_de_cours/bm/template/bookmarks.xbel'
     'cd ~/notes_de_cours/bm/ && ./xbel2md.py'
-    'cd ~/notes_de_cours/bm/ && source venv/bin/activate && mkdocs gh-deploy'
     'date > /Users/etiennerivard/Library/CloudStorage/Dropbox/keepass_perso/current_date.txt'
     'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/FantasSecrets.kdbx /Users/etiennerivard/Library/CloudStorage/Dropbox/keepass_perso/'
 )
@@ -60,7 +59,6 @@ command_texts=(
     'homebrew-installed-packages.txt         '
     'bookmarks.xbel                          '
     'generate markdown                       '
-    'deploy bookmarks                        '
     'fake file for dropbox                   '
     'FantasSecrets.kdbx sur Dropbox          '
 )
