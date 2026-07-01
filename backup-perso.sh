@@ -25,6 +25,7 @@ commands=(
     'rsync -ahP --exclude=".DS_Store" ~/Documents root@guizmo.profinfo.ca:/mnt/blockstorage/backup_perso/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/notes_de_cours root@guizmo.profinfo.ca:/mnt/blockstorage/backup_perso/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/projets root@guizmo.profinfo.ca:/mnt/blockstorage/backup_perso/'
+    'rsync -ahP --exclude=".DS_Store" "/Users/etiennerivard/Library/Mobile Documents/iCloud~md~obsidian/Documents/" root@guizmo.profinfo.ca:/mnt/blockstorage/backup_perso/obsidian/'
     'rsync -ahP ~/.aliases root@guizmo.profinfo.ca:/mnt/blockstorage/backup_perso/'
     'rsync -ahP ~/.mrconfig root@guizmo.profinfo.ca:/mnt/blockstorage/backup_perso/'
     'rsync -ahP ~/.ssh root@guizmo.profinfo.ca:/mnt/blockstorage/backup_perso/'
@@ -37,6 +38,7 @@ commands=(
 command_texts=(
     'notes_de_cours                          '
     'projets                                 '
+    'obsidian                                '
     '.aliases                                '
     '.mrconfig                               '
     '.ssh                                    '
