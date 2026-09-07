@@ -22,7 +22,7 @@
 
 set -euo pipefail
 
-TARGET_DIR="/Users/etiennerivard/Library/Mobile Documents/iCloud~md~obsidian/Documents/Cegep"
+TARGET_DIR="/Users/etiennerivard/Library/Mobile Documents/iCloud~md~obsidian/Documents/Cegep/Cegep/Histoires"
 CONTAINER="iCloud.md.obsidian"
 RESTART_BIRD=0
 WAIT_UPLOAD=0
