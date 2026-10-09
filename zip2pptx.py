@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Turn a .zip of images into a .pptx with one image per slide.
 
-Usage: python3 zip2pptx.py images.zip [output.pptx]
+Usage: python3 zip2pptx.py [--progress] images.zip [output.pptx]
+  --progress  print "PROGRESS <done> <total>" after each slide (used by zip2pptx-progress.js)
 Requires: pip install python-pptx
 """
 import io
@@ -24,10 +25,13 @@ def natural_key(name):
 
 
 def main():
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+    progress = "--progress" in args
+    args = [a for a in args if a != "--progress"]
+    if not args:
         sys.exit(__doc__)
-    zip_path = Path(sys.argv[1])
-    out_path = Path(sys.argv[2]) if len(sys.argv) > 2 else zip_path.with_suffix(".pptx")
+    zip_path = Path(args[0])
+    out_path = Path(args[1]) if len(args) > 1 else zip_path.with_suffix(".pptx")
 
     prs = Presentation()
     prs.slide_width, prs.slide_height = SLIDE_W, SLIDE_H
@@ -44,7 +48,7 @@ def main():
         if not names:
             sys.exit(f"No images found in {zip_path}")
 
-        for name in names:
+        for i, name in enumerate(names, 1):
             data = zf.read(name)
             with Image.open(io.BytesIO(data)) as img:
                 w, h = img.size
@@ -61,6 +65,11 @@ def main():
             slide.shapes.add_picture(
                 io.BytesIO(data), (SLIDE_W - pw) // 2, (SLIDE_H - ph) // 2, pw, ph
             )
+            if progress:
+                print(f"PROGRESS {i} {len(names)}", flush=True)
+
+    if progress:
+        print("SAVING", flush=True)
 
     prs.save(out_path)
     print(f"Wrote {len(names)} slides to {out_path}")

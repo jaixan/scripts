@@ -14,6 +14,11 @@
   const shots = new Map(); // caption -> Blob
   const studentId = new URLSearchParams(location.search).get('student') || 'student';
 
+  const studentName = document.querySelector('.StudentOverviewStudentInfo__name')?.innerText.trim() || null;
+  const safe = (s) => s.replace(/[\\/:*?"<>|]/g, '-').trim();
+  const zipName = `${safe(studentName || `student_${studentId}`)}.zip`;
+  console.log(`Student: ${studentName ?? '(name not found, using id)'}`);
+
   const grabVisible = async () => {
     for (const item of scroller.querySelectorAll('.ScreenMonitoringHistory__screenshot_item')) {
       const caption = item.innerText.trim();
@@ -68,7 +73,9 @@
   let offset = 0;
   for (const [caption, blob] of [...shots].sort(([a], [b]) => a.localeCompare(b))) {
     const data = new Uint8Array(await blob.arrayBuffer());
-    const name = new TextEncoder().encode(`${caption.replace(/:/g, '-').replace(' ', '_')}.${ext(data)}`);
+    // Name each file after the timestamp shown under the screenshot (colons aren't allowed in filenames).
+    const stamp = caption.match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/)?.[0] ?? caption;
+    const name = new TextEncoder().encode(`${safe(stamp)}.${ext(data)}`);
     const crc = crc32(data);
 
     const local = new DataView(new ArrayBuffer(30));
@@ -102,10 +109,10 @@
   end.setUint32(16, offset, true);
 
   const zip = new Blob([...parts, ...central, end], { type: 'application/zip' });
-  if (DRY_RUN) return { count: shots.size, zipBytes: zip.size, first: [...shots.keys()].sort()[0], last: [...shots.keys()].sort().at(-1) };
+  if (DRY_RUN) return { zipName, count: shots.size, zipBytes: zip.size, first: [...shots.keys()].sort()[0], last: [...shots.keys()].sort().at(-1) };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(zip);
-  a.download = `screenshots_student_${studentId}.zip`;
+  a.download = zipName;
   document.body.appendChild(a);
   a.click();
   a.remove();
