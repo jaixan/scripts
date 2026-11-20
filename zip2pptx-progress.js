@@ -1,18 +1,27 @@
 #!/usr/bin/osascript -l JavaScript
-// Progress window for zip2pptx.py, used by the "Créer PowerPoint depuis ZIP" Quick Action.
-// Usage: osascript -l JavaScript zip2pptx-progress.js <python> <zip2pptx.py> file1.zip [file2.zip ...]
+// Progress window for zip2pptx.py / zip2pdf.py / checkexam.py, used by the "Créer PowerPoint depuis ZIP",
+// "Créer PDF depuis ZIP" and "Détecter IA dans ZIP" Quick Actions.
+// Usage: osascript -l JavaScript zip2pptx-progress.js <python> <zip2pptx.py|zip2pdf.py|checkexam.py> file1.zip [file2.zip ...]
 ObjC.import('AppKit');
 ObjC.import('QuartzCore');
 
+const KINDS = {
+  'zip2pptx.py': { title: 'ZIP → PowerPoint', unit: 'Diapositive', saving: 'Enregistrement du PowerPoint…', args: [] },
+  'zip2pdf.py': { title: 'ZIP → PDF', unit: 'Page', saving: 'Enregistrement du PDF…', args: [] },
+  'checkexam.py': { title: 'Détection IA', unit: 'Capture analysée', saving: 'Création du rapport…', args: ['--open'] },
+};
+
 function run(argv) {
   const [python, script, ...zips] = argv;
+  const kind = KINDS[$(script).lastPathComponent.js] || KINDS['zip2pptx.py'];
+  const title = kind.title;
   const app = $.NSApplication.sharedApplication;
   app.setActivationPolicy($.NSApplicationActivationPolicyAccessory);
 
   const W = 420, H = 110;
   const win = $.NSPanel.alloc.initWithContentRectStyleMaskBackingDefer(
     $.NSMakeRect(0, 0, W, H), $.NSWindowStyleMaskTitled, $.NSBackingStoreBuffered, false);
-  win.title = 'ZIP → PowerPoint';
+  win.title = title;
   win.level = $.NSFloatingWindowLevel;
   win.center;
 
@@ -76,7 +85,7 @@ function run(argv) {
     const out = $.NSFileHandle.fileHandleForWritingAtPath(log);
     const task = $.NSTask.alloc.init;
     task.executableURL = $.NSURL.fileURLWithPath(python);
-    task.arguments = $([script, '--progress', zip]);
+    task.arguments = $([script, '--progress', ...kind.args, zip]);
     task.standardOutput = out;
     task.standardError = out;
     const err = $();
@@ -94,11 +103,11 @@ function run(argv) {
       if (!last || last === shown) continue;
       if (last === 'SAVING') {
         setProgress(1);
-        detail.stringValue = 'Enregistrement du PowerPoint…';
+        detail.stringValue = kind.saving;
       } else {
         const [, done, total] = last.split(' ').map(Number);
-        setProgress(done / total);
-        detail.stringValue = `Diapositive ${done} sur ${total}`;
+        setProgress(total ? done / total : 0);
+        detail.stringValue = `${kind.unit} ${done} sur ${total}`;
       }
       shown = last;
     }
@@ -116,7 +125,7 @@ function run(argv) {
   sa.includeStandardAdditions = true;
   for (const r of results) {
     if (r.ok) {
-      sa.displayNotification(r.msg, { withTitle: 'ZIP → PowerPoint', soundName: 'Glass' });
+      sa.displayNotification(r.msg, { withTitle: title, soundName: 'Glass' });
     } else {
       sa.activate();
       sa.displayAlert(`Échec pour ${r.name}`, { message: r.msg });
