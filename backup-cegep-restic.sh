@@ -46,7 +46,7 @@ paths=(
     "$HOME/.ssh"
     "$HOME/scripts"
     "$HOME/Library/Application Support/Code/User/settings.json"
-    "$HOME/homebrew-installed-packages.txt"
+    "$HOME/Brewfile"
 )
 
 # Exclusions globales (comme pour tous les rsync)
@@ -64,7 +64,7 @@ for dir in notes_de_cours projets demo_cours scripts; do
 done
 
 steps=(
-    'Liste des paquets Homebrew'
+    'Brewfile (formules, casks, taps, App Store, VS Code)'
     'Sauvegarde restic'
     'Nettoyage des anciens snapshots'
     'Fichier bidon pour Dropbox'
@@ -84,7 +84,8 @@ run_step() {
 }
 
 brew_list() {
-    brew deps --tree --installed > "$HOME/homebrew-installed-packages.txt" 2>>"$LOG"
+    # Restauration : brew bundle install --file=~/Brewfile (ou restore-cegep-restic.sh --brew)
+    brew bundle dump --file="$HOME/Brewfile" --force 2>>"$LOG"
 }
 
 restic_backup() {
