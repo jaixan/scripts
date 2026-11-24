@@ -24,9 +24,9 @@ progress_bar() {
 commands=(
     'rsync -ahP --exclude=".DS_Store" --exclude=".next/" --exclude="node_modules/" ~/Documents root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
     'rsync -ahP --exclude=".DS_Store" ~/keys root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
-    'rsync -ahP --exclude=".DS_Store" --exclude=".next/" --exclude="node_modules/" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/CegepVicto root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
-    'rsync -ahP --exclude=".DS_Store" --exclude=".next/" --exclude="node_modules/" /Users/etiennerivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/Administration root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
-    'rsync -ahP --exclude=".DS_Store" --exclude=".next/" --exclude="node_modules/" "/Users/etiennerivard/Library/Mobile Documents/iCloud~md~obsidian/Documents/" root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/obsidian/'
+    'rsync -ahP --exclude=".DS_Store" --exclude=".next/" --exclude="node_modules/" /Users/erivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/CegepVicto root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
+    'rsync -ahP --exclude=".DS_Store" --exclude=".next/" --exclude="node_modules/" /Users/erivard/Library/CloudStorage/OneDrive-CégepdeVictoriaville/Administration root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
+    'rsync -ahP --exclude=".DS_Store" --exclude=".next/" --exclude="node_modules/" "/Users/erivard/Library/Mobile Documents/iCloud~md~obsidian/Documents/" root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/obsidian/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/notes_de_cours root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/projets root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
     'rsync -ahP --exclude=".DS_Store" --exclude='.git/' --exclude='node_modules/' --exclude='.next/' --exclude='venv/' --exclude='sites/' --exclude='www/' ~/demo_cours root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
@@ -39,8 +39,8 @@ commands=(
     'rsync -ahP ~/homebrew-installed-packages.txt root@guizmo.profinfo.ca:/mnt/blockstorage/backup_cegep/'
     'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/bookmarks.xbel ~/notes_de_cours/bm/template/bookmarks.xbel'
     'cd ~/notes_de_cours/bm/ && ./xbel2md.py'
-    'date > /Users/etiennerivard/Library/CloudStorage/Dropbox/keepass_perso/current_date.txt'
-    'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/FantasSecrets.kdbx /Users/etiennerivard/Library/CloudStorage/Dropbox/keepass_perso/'
+    'date > /Users/erivard/Library/CloudStorage/Dropbox/keepass_perso/current_date.txt'
+    'rsync -ahP root@guizmo.profinfo.ca:/mnt/blockstorage/coffre/FantasSecrets.kdbx /Users/erivard/Library/CloudStorage/Dropbox/keepass_perso/'
 )
 
 # Text of commands to execute

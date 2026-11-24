@@ -1,3 +1,3 @@
-rm -rf /Users/etiennerivard/Library/Application\ Support/Code/User/workspaceStorage/*
-rm -rf /Users/etiennerivard/Library/Application\ Support/Code/User/globalStorage/github.copilot-chat
+rm -rf /Users/erivard/Library/Application\ Support/Code/User/workspaceStorage/*
+rm -rf /Users/erivard/Library/Application\ Support/Code/User/globalStorage/github.copilot-chat
 
