@@ -7,5 +7,5 @@ if [ "$#" -ne 1 ]; then
 fi
 
 # Call the Python script with the provided parameter
-sudo python3.13 ~/scripts/check_final.py "$1"
+sudo python3.15 ~/scripts/check_final.py "$1"
 sudo chmod -R 777 ./extracted_apache2

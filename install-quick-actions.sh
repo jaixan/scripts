@@ -16,7 +16,7 @@ fi
 cd "$DIR"
 
 # 2. Environnement Python
-PY="$(command -v python3.13 || command -v python3 || true)"
+PY="$(command -v python3.15 || command -v python3 || true)"
 if [[ -z "$PY" ]]; then
   echo "Erreur : python3 introuvable. Installe-le (ex. brew install python@3.13)." >&2
   exit 1
