@@ -1,6 +1,6 @@
 // Bookmarklet : capture le post Reddit à l'écran et le télécharge en fichier .md
 // Source lisible. Pour générer le bookmarklet :
-//   node -e 'console.log("javascript:"+encodeURIComponent(require("fs").readFileSync("reddit2md-bookmarklet.js","utf8")))'
+//   node -e 'console.log("javascript:"+encodeURIComponent(require("fs").readFileSync("reddit2md-bookmarklet.js","utf8")))' > reddit2md-bookmarklet.txt
 (() => {
   const now = new Date();
   const pad = (n) => String(n).padStart(2, '0');
@@ -74,13 +74,23 @@
     for (const el of root.querySelectorAll('*')) if (el.shadowRoot) out.push(...deepAll(el.shadowRoot, sel));
     return out;
   };
-  const isUpvoted = (el) => {
+  // Commentaire auquel appartient un élément, en traversant les shadow DOM
+  const ownerComment = (el) => {
+    for (let n = el; n; n = n.getRootNode().host) {
+      const c = n.closest('shreddit-comment');
+      if (c) return c;
+    }
+    return null;
+  };
+  const isUpvoted = (el, owner) => {
     if (!el) return false;
     for (const a of ['vote-state', 'vote-type', 'votestate', 'user-vote'])
       if (/up/i.test(el.getAttribute(a) || '')) return true;
     const scope = el.shadowRoot ? [el, el.shadowRoot] : [el];
     return scope.some((r) => deepAll(r, 'button[upvote], button[aria-label*="pvote" i]').some((b) =>
-      b.getAttribute('aria-pressed') === 'true' || b.hasAttribute('active') || b.hasAttribute('upvoted')));
+      // Ignore les boutons des réponses imbriquées
+      ownerComment(b) === owner &&
+      (b.getAttribute('aria-pressed') === 'true' || b.hasAttribute('active') || b.hasAttribute('upvoted'))));
   };
 
   // Commentaires upvotés (seulement ceux chargés dans la page)
@@ -88,7 +98,7 @@
   if (post) {
     for (const c of document.querySelectorAll('shreddit-comment')) {
       const row = [...c.children].find((k) => k.tagName.toLowerCase() === 'shreddit-comment-action-row');
-      if (!isUpvoted(c) && !isUpvoted(row)) continue;
+      if (!isUpvoted(c, c) && !isUpvoted(row, c)) continue;
       const cb = [...c.children].find((k) => k.getAttribute('slot') === 'comment') ||
         document.getElementById(c.getAttribute('thingid') + '-comment-rtjson-content');
       if (cb) comments.push({ author: c.getAttribute('author') || '', text: clean(md(cb)) });
