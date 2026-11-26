@@ -28,6 +28,7 @@ if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
     exit 1
 fi
 
+REMOTE="root@olive.profinfo.ca"
 ONEDRIVE="$HOME/Library/CloudStorage/OneDrive-CégepdeVictoriaville"
 DROPBOX_KP="$HOME/Library/CloudStorage/Dropbox/keepass_perso"
 LOG="$HOME/Library/Logs/backup-cegep-restic.log"
@@ -106,7 +107,7 @@ restic_prune() {
 }
 
 fetch_bookmarks() {
-    rsync -ah "$REMOTE:/mnt/blockstorage/coffre/bookmarks.xbel" \
+    rsync -ah "$REMOTE:/mnt/extdrive/coffre/bookmarks.xbel" \
         "$HOME/notes_de_cours/bm/template/bookmarks.xbel" 2>>"$LOG"
 }
 
@@ -119,7 +120,7 @@ touch_dropbox() {
 }
 
 fetch_keepass() {
-    rsync -ah "$REMOTE:/mnt/blockstorage/coffre/FantasSecrets.kdbx" "$DROPBOX_KP/" 2>>"$LOG"
+    rsync -ah "$REMOTE:/mnt/extdrive/coffre/FantasSecrets.kdbx" "$DROPBOX_KP/" 2>>"$LOG"
 }
 
 echo "=== $(date) ===" >> "$LOG"
